@@ -13,6 +13,7 @@ export interface Inner {
 }
 
 export interface Game {
+  version:number;
   n_finished_conversations:number;
 }
 
@@ -20,6 +21,7 @@ export type State = Inner & IObservableObject;
 
 export function create_new_game() : Game {
   return {
+    version: 0,
     n_finished_conversations: 0,
   };
 }

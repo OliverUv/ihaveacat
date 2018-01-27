@@ -1,12 +1,17 @@
 import * as React from 'react';
 import './App.css';
 import { observer, inject } from 'mobx-react';
+import { action } from 'mobx';
 import * as S from './store';
 
 interface AppProps {
   state:S.State;
 }
 interface AppState {}
+
+const do_enter_game = action(() => {
+  S.state.view = S.View.Game;
+});
 
 @observer
 export class App extends React.Component<AppProps, {}> {
@@ -29,7 +34,7 @@ export class App extends React.Component<AppProps, {}> {
           (っ' ▽' )ノ hello <code>FRIEND</code> please enjoy the comic
           PS: {text}
         </p>
-        <div className='App-start' onClick={() => { console.log('hahaha'); }}>
+        <div className='App-start' onClick={do_enter_game}>
           ..........................Click Blay
         </div>
         <footer className='App-footer'>

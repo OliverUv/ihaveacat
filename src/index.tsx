@@ -17,10 +17,3 @@ async function init() {
 
 // tslint:disable-next-line
 init();
-
-setTimeout(
-  action(() => {
-    S.state.view = S.View.Game;
-  }),
-  5000,
-);

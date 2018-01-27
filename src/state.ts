@@ -25,12 +25,16 @@ export type State = Inner & IObservableObject;
 
 export const state:State = observable({
   view: View.StartMenu,
-  settings: {
-    volume: 0.5,
-    locale: LocaleCode.zh,
-  },
+  settings: new_settings(),
   game: Game.new_game_state(),
 });
+
+function new_settings() : Settings {
+  return {
+    volume: 0.5,
+    locale: LocaleCode.zh,
+  };
+}
 
 /**
  * Load game from local storage
@@ -38,20 +42,29 @@ export const state:State = observable({
  * @return {boolean} true if loaded a game
  */
 export function load_game() : boolean {
-  const load = LocalStorage.load();
+  const load = LocalStorage.load_game();
   if (load == undefined) { return false; }
-  action(() => {
-    state.game = load;
-  });
+  state.game = load;
+  return true;
+}
+
+function load_settings() {
+  const load = LocalStorage.load_settings();
+  if (load == undefined) { return false; }
+  state.settings = load;
   return true;
 }
 
 export function init() {
   load_game();
+  load_settings();
   autorun(() => {
-    LocalStorage.save(state.game);
+    LocalStorage.save_game(state.game);
     console.log(`saved game`);
     console.log(state.game);
+    LocalStorage.save_settings(state.settings);
+    console.log(`saved settings`);
+    console.log(state.settings);
   });
 }
 

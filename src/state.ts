@@ -1,6 +1,7 @@
-import { observable, IObservableObject, autorun } from 'mobx';
+import { action, observable, IObservableObject, autorun } from 'mobx';
 import * as Game from './game';
 import * as LocalStorage from './local_storage';
+import { LocaleCode } from './trans';
 
 export enum View {
   StartMenu,
@@ -9,8 +10,14 @@ export enum View {
   Credits,
 }
 
+export interface Settings {
+  volume:number; // [0,1]
+  locale:LocaleCode;
+}
+
 export interface Inner {
   view:View;
+  settings:Settings;
   game:Game.State;
 }
 
@@ -18,6 +25,10 @@ export type State = Inner & IObservableObject;
 
 export const state:State = observable({
   view: View.StartMenu,
+  settings: {
+    volume: 0.5,
+    locale: LocaleCode.zh,
+  },
   game: Game.new_game_state(),
 });
 
@@ -29,7 +40,9 @@ export const state:State = observable({
 export function load_game() : boolean {
   const load = LocalStorage.load();
   if (load == undefined) { return false; }
-  state.game = load;
+  action(() => {
+    state.game = load;
+  });
   return true;
 }
 
@@ -39,5 +52,11 @@ export function init() {
     LocalStorage.save(state.game);
     console.log(`saved game`);
     console.log(state.game);
+  });
+}
+
+export function set_language(lang:LocaleCode) {
+  action(() => {
+    state.settings.locale = lang;
   });
 }

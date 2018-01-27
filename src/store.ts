@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, IObservableObject } from 'mobx';
 
 export enum View {
   StartMenu,
@@ -7,11 +7,20 @@ export enum View {
   Credits,
 }
 
-// export interface State {
-  // view:View;
-// }
+export interface Inner {
+  view:View;
+  game:Game;
+}
 
-export const state = observable({
+export interface Game {
+  n_finished_conversations:number;
+}
+
+export type State = Inner & IObservableObject;
+
+export const state:State = observable({
   view: View.StartMenu,
+  game: {
+    n_finished_conversations: 0,
+  },
 });
-export type State = typeof state;

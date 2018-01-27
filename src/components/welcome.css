@@ -1,0 +1,40 @@
+.Welcome {
+    background-color: #000;
+}
+
+.Welcome img {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+      
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+
+    filter: brightness(60%);
+}
+
+.Welcome-game-title {
+    font-size: 8vw;
+    color: white;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    bottom: 15vw;
+}
+
+.Welcome-TimeBox {
+    color: white;
+    position: fixed;
+    width: 100%;
+    margin-top: 25vw;
+    text-align: center;
+}
+
+.Welcome-TimeBox-time {
+    font-size: 17vw;
+}
+
+.Welcome-TimeBox-date {
+    font-size: 6vw;
+}

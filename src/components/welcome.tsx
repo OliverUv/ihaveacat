@@ -5,20 +5,27 @@ import { FormattedHTMLMessage } from 'react-intl';
 import * as S from '../state';
 import { Translation } from '../trans/zh_CN';
 
+import './welcome.css';
+
 interface WelcomeProps {
 }
 
 interface WelcomeState {}
 
 export class Welcome extends React.Component<WelcomeProps, WelcomeState> {
+    public handleClick = () => {
+
+    }
+
     public render() {
         return (
-            <Page>
-               <TimeBox />
-               <span>
-                   <FormattedHTMLMessage id='game_title' /> >>
-               </span>
-            </Page>
+            <div className='Welcome' onClick={this.handleClick}>
+                <img src='welcome.jpg' />
+                <TimeBox />
+                <div className='Welcome-game-title'>
+                    <FormattedHTMLMessage id='game_title' /> >>
+                </div>
+            </div>
         );
     }
 }
@@ -56,10 +63,16 @@ class TimeBox extends React.Component {
         }
 
         return (
-            <div>
-               <span>{date.getHours()} : {date.getMinutes()}</span>
+            <div className='Welcome-TimeBox'>
+               <span className='Welcome-TimeBox-time'>
+                   {date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}
+                   :
+                   {date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}
+               </span>
                <br />
-               <span>{date.getMonth() + 1}月{date.getDate()}日 星期{weekDay}</span>
+               <span className='Welcome-TimeBox-date'>
+                   {date.getMonth() + 1}月{date.getDate()}日 星期{weekDay}
+                </span>
             </div>
         );
     }

@@ -20,7 +20,7 @@
     "no-unused-variable": false,
     "no-use-before-declare": false,
     "indent": [true, "spaces"],
-    "linebreak-style": [true, "LF"],
+    //"linebreak-style": [true, "LF"],
     "label-position": true,
     "no-default-export": true,
     "no-for-in-array": true,

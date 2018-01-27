@@ -1,7 +1,9 @@
 import * as React from 'react';
-import './App.css';
-import { observer, inject } from 'mobx-react';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { action } from 'mobx';
+import { observer, inject } from 'mobx-react';
+
+import './App.css';
 import * as S from './state';
 
 interface AppProps {
@@ -28,10 +30,10 @@ export class App extends React.Component<AppProps, {}> {
       <div className='App'>
         <header className='App-header'>
           <img src='topcat.jpg' className='App-logo' alt='logo' />
-          <h1 className='App-title'>ANGERY KITTENS</h1>
+          <h1 className='App-title'>ANGRY KITTENS</h1>
         </header>
         <p className='App-intro'>
-          (っ' ▽' )ノ hello <code>FRIEND</code> please enjoy the comic
+          <FormattedHTMLMessage id='welcome' />
           PS: {text}
         </p>
         <div className='App-start' onClick={do_enter_game}>

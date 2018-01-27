@@ -18,9 +18,13 @@ export interface Game {
 
 export type State = Inner & IObservableObject;
 
+export function create_new_game() : Game {
+  return {
+    n_finished_conversations: 0,
+  };
+}
+
 export const state:State = observable({
   view: View.StartMenu,
-  game: {
-    n_finished_conversations: 0,
-  },
+  game: create_new_game(),
 });

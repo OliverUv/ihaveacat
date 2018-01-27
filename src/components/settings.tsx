@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { action } from 'mobx';
 import { FormattedHTMLMessage } from 'react-intl';
-import { Page, Toolbar, ToolbarButton, Icon, List, ListItem, Radio } from 'react-onsenui';
+import { Page, Toolbar, ToolbarButton, Icon, List, ListItem, Range, Radio } from 'react-onsenui';
 
 import { state } from '../state';
 import * as S from '../state';
@@ -18,14 +18,11 @@ const renderLangRow = action((row:string[], index:number) => {
             <Radio
                 inputId={`locale-${index}`}
                 checked={state.settings.locale === index}
-                onChange={() => {
-                    console.log(state.settings.locale);
-                    S.set_language(index);
-                    }}
+                onChange={() => state.settings.locale = index }
             />
         </label>
         <label htmlFor={`locale-${index}`} className='center'>
-            {row[index]}
+            {row}
         </label>
     </ListItem>
     );
@@ -37,13 +34,29 @@ export class Settings extends React.Component<SettingsProps> {
         return (
             <Toolbar>
                 <div className='center'>Settings</div>
-                <div className='right'>
+                <div className='left' onClick={this.handleReturn}>
                     <ToolbarButton>
-                        <Icon icon='ion-navicon, material:md-menu' />
+                        <Icon icon='ion-chevron-left, material:md-menu' />
                     </ToolbarButton>
                 </div>
             </Toolbar>
         );
+    }
+
+    public handleVolumeChange = (e:any) => {
+        state.settings.volume = e.target.value;
+    }
+
+    public handleReset = () => {
+
+    }
+
+    public handleCredit = () => {
+
+    }
+
+    public handleReturn = () => {
+
     }
 
     public render() {
@@ -53,6 +66,52 @@ export class Settings extends React.Component<SettingsProps> {
                     renderRow={renderLangRow}
                     dataSource={['English', '中文', 'meow']}
                 />
+
+                <br />
+
+                <List>
+                    <ListItem>
+                        <label className='right'>
+                            <Range
+                                value={state.settings.volume}
+                                onChange={this.handleVolumeChange}
+                                />
+                        </label>
+                        <label className='center'>
+                            Music
+                            {/* FIXME: lang */}
+                        </label>
+                    </ListItem>
+                </List>
+
+                <br />
+
+                <List className='inset'>
+                    <ListItem
+                        tappable
+                        modifier='chevron'
+                        onClick={this.handleCredit}
+                    >
+                        <div className='center'>
+                            Credit
+                            {/* FIXME: lang */}
+                        </div>
+                    </ListItem>
+                </List>
+
+                <br />
+
+                <List>
+                    <ListItem
+                        tappable
+                        onClick={this.handleReset}
+                    >
+                        <div className='center'>
+                            Reset
+                            {/* FIXME: lang */}
+                        </div>
+                    </ListItem>
+                </List>
             </Page>
         );
         //FIXME: meow lang

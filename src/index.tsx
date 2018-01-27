@@ -5,7 +5,7 @@ import { register } from './registerServiceWorker';
 import './index.css';
 import { action } from 'mobx';
 
-import * as S from './store';
+import * as S from './state';
 
 async function init() {
   ReactDOM.render(

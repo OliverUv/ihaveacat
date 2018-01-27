@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
-import * as S from './store';
+import * as S from './state';
 
 interface AppProps {
   state:S.State;

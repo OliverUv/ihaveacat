@@ -32,8 +32,7 @@ export class Main extends React.Component<MainProps, {}> {
           locale={LocaleCode[S.state.settings.locale]}
           messages={messages[S.state.settings.locale]}
           key={LocaleCode[S.state.settings.locale]}>
-        {/* <App state={S.state}/> */}
-        <Welcome />
+        <App state={S.state}/>
       </IntlProvider>
     );
   }

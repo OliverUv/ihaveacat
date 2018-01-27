@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@onsenui/custom-elements@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@onsenui/custom-elements/-/custom-elements-1.0.0.tgz#8e2b5c8968b8d94da70c6e92ecc56b47f79a0ff3"
+
+"@onsenui/fastclick@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@onsenui/fastclick/-/fastclick-1.1.0.tgz#6294390b46ea975e1a7d65b1c014665140b73c4f"
+
 "@types/jest@^22.1.0":
   version "22.1.0"
   resolved "http://registry.npm.taobao.org/@types/jest/download/@types/jest-22.1.0.tgz#c1de03bbac66fac4cc741f7a69cb73bc01a1707c"
@@ -20,6 +28,12 @@
 "@types/react-intl@^2.3.2":
   version "2.3.2"
   resolved "http://registry.npm.taobao.org/@types/react-intl/download/@types/react-intl-2.3.2.tgz#a57433871dedf2f12ba8eeca645e5ce5a37d102a"
+
+"@types/react-onsenui@^2.8.3":
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react-onsenui/-/react-onsenui-2.8.3.tgz#2f4538ead6a7cd2debb4aa6ab0f39ea84430c370"
+  dependencies:
+    "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.0.35":
   version "16.0.35"
@@ -1009,7 +1023,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "http://registry.npm.taobao.org/core-js/download/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.1:
   version "2.5.3"
   resolved "http://registry.npm.taobao.org/core-js/download/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
@@ -3736,6 +3750,14 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+onsenui@^2.9.1:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/onsenui/-/onsenui-2.9.1.tgz#08db80f96eb773ca4544161a8bee9a289f8f1cac"
+  dependencies:
+    "@onsenui/custom-elements" "1.0.0"
+    "@onsenui/fastclick" "^1.1.0"
+    core-js "^2.5.1"
+
 opn@5.1.0:
   version "5.1.0"
   resolved "http://registry.npm.taobao.org/opn/download/opn-5.1.0.tgz#72ce2306a17dbea58ff1041853352b4a8fc77519"
@@ -4495,6 +4517,12 @@ react-intl@^2.4.0:
     intl-messageformat "^2.1.0"
     intl-relativeformat "^2.0.0"
     invariant "^2.1.1"
+
+react-onsenui@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/react-onsenui/-/react-onsenui-1.10.0.tgz#45bcbe646f9937a075aaa2ed05102180e8dd8126"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-scripts-ts@2.13.0:
   version "2.13.0"

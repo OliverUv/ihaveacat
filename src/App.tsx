@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 
 import './App.css';
 import * as S from './state';
+import { state } from './state';
 
 interface AppProps {
   state:S.State;
@@ -12,7 +13,8 @@ interface AppProps {
 interface AppState {}
 
 const do_enter_game = action(() => {
-  S.state.view = S.View.Game;
+  state.view = S.View.Game;
+  state.game.n_finished_conversations += 1;
 });
 
 @observer

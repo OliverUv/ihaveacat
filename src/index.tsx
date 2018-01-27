@@ -19,9 +19,12 @@ const messages = en_msg;
 // const locale = 'zh';
 // const messages = zh_CN_msg;
 
-addLocaleData([...en, ...zh]);
-
 async function init() {
+
+  addLocaleData([...en, ...zh]);
+
+  S.init();
+
   ReactDOM.render(
     <IntlProvider
         locale={locale}

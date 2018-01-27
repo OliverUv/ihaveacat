@@ -1,9 +1,5 @@
 import * as React from 'react';
-import { Page } from 'react-onsenui';
 import { FormattedHTMLMessage } from 'react-intl';
-
-import * as S from '../state';
-import { Translation } from '../trans/zh_CN';
 
 import './welcome.css';
 
@@ -23,7 +19,7 @@ export class Welcome extends React.Component<WelcomeProps, WelcomeState> {
                 <img src='welcome.jpg' />
                 <TimeBox />
                 <div className='Welcome-game-title'>
-                    <FormattedHTMLMessage id='game_title' /> >>
+                    <FormattedHTMLMessage id='game_title' /> >
                 </div>
             </div>
         );

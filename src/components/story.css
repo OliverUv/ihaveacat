@@ -1,0 +1,36 @@
+.Story {
+
+}
+
+.Story img {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+      
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.Story-text::after {
+    opacity: 0.2;
+}
+
+.Story-text {
+    position: fixed;
+    bottom: 10vw;
+
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: rgba(255,255,255,.4);
+    border-radius: 5px;
+    padding: 2vw;
+}
+
+.Story-text span {
+    word-wrap: break-word; 
+    word-break: normal; 
+    text-align: center;
+}

@@ -12,7 +12,7 @@ import { App } from './App';
 
 import { messages, LocaleCode } from './trans';
 
-import { Settings } from 'components/settings';
+import { Settings, Credits, Story, Welcome } from 'components';
 
 interface MainProps {
   state:S.State;
@@ -27,13 +27,29 @@ export class Main extends React.Component<MainProps, {}> {
     const locale = this.props.state.settings.locale;
     const msg = messages[locale];
 
+    let page = <App state={S.state} />;
+
+    switch (S.state.view) {
+      case S.View.StartMenu:
+        page = <Welcome />;
+        break;
+      case S.View.Story1:
+        page = <Story />;
+        break;
+      case S.View.Settings:
+        page = <Settings state={S.state} />;
+        break;
+      case S.View.Credits:
+        page = <Credits />;
+        break;
+    }
+
     return (
       <IntlProvider
           locale={LocaleCode[S.state.settings.locale]}
           messages={messages[S.state.settings.locale]}
           key={LocaleCode[S.state.settings.locale]}>
-        {/* <App state={S.state}/> */}
-        <Settings state={S.state} />
+          {page}
       </IntlProvider>
     );
   }

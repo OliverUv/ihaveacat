@@ -34,8 +34,8 @@ export class Settings extends React.Component<SettingsProps> {
         return (
             <Toolbar>
                 <div className='center'>Settings</div>
-                <div className='left' onClick={this.handleReturn}>
-                    <ToolbarButton>
+                <div className='left'>
+                    <ToolbarButton onClick={this.handleReturn}>
                         <Icon icon='ion-chevron-left, material:md-menu' />
                     </ToolbarButton>
                 </div>
@@ -52,11 +52,11 @@ export class Settings extends React.Component<SettingsProps> {
     }
 
     public handleCredit = () => {
-
+        state.view = S.View.Credits;
     }
 
     public handleReturn = () => {
-
+        state.view = S.View.Game;
     }
 
     public render() {

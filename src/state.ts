@@ -5,6 +5,9 @@ import { LocaleCode } from './trans';
 
 export enum View {
   StartMenu,
+  Story1,
+  Story2,
+  Story3,
   Settings,
   Game,
   Credits,
@@ -24,7 +27,7 @@ export interface Inner {
 export type State = Inner & IObservableObject;
 
 export const state:State = observable({
-  view: View.StartMenu,
+  view: View.Settings,
   settings: new_settings(),
   game: Game.new_game_state(),
 });

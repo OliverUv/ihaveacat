@@ -1,4 +1,6 @@
-export function save(state:object) {
+import { State } from './game';
+
+export function save(state:State) {
   try {
     localStorage.setItem('ihaveacat', JSON.stringify(state));
   } catch (e) {
@@ -6,7 +8,7 @@ export function save(state:object) {
   }
 }
 
-export function load() : object|undefined {
+export function load() : State|undefined {
   const game_state = localStorage.getItem('ihaveacat');
   if (!game_state) { return undefined; }
   try {

@@ -14,7 +14,6 @@ interface AppState {}
 
 const do_enter_game = action(() => {
   state.view = S.View.Game;
-  state.game.n_finished_conversations += 1;
 });
 
 @observer

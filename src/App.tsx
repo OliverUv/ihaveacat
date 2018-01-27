@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { action } from 'mobx';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import './App.css';
 import * as S from './state';

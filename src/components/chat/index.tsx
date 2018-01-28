@@ -9,6 +9,7 @@ import {
   Chat as PlayChat,
   NodeType,
   TalkIterator,
+  PCNode,
   TalkList,
   is_npc_node,
   is_pc_node,
@@ -54,7 +55,8 @@ interface LogMsg {
 
 interface ChatState {
   model:TalkIterator;
-  log: LogMsg[];
+  current_choice?:PCNode;
+  log:LogMsg[];
 }
 
 export class Chat extends React.Component<ChatProps, ChatState> {
@@ -62,12 +64,26 @@ export class Chat extends React.Component<ChatProps, ChatState> {
       super(props);
       this.state = {
         model: new TalkIterator(props.chat.content),
+        current_choice: undefined,
         log: [],
       };
     }
 
     private choice(c:TransKey) {
-      this.state.model.next(c);
+      const r = this.state.model.next(c);
+      for (let i = 0; i < r.responses.length; i++) {
+        const response = r.responses[i];
+        let npc:TransKey|undefined = undefined;
+        if ((response as any).npc != undefined) {
+          npc = (response as any).npc;
+        }
+        this.state.log.push({
+          player: false,
+          npc,
+          content: response.id,
+          type: response.type,
+        });
+      }
     }
 
     public render() {
@@ -96,5 +112,6 @@ export class Chat extends React.Component<ChatProps, ChatState> {
       return (
         <PCChat type={l.type} content={l.content} />
       );
+      throw new Error('Unknown thing in message log');
     }
 }

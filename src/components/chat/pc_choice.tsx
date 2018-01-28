@@ -17,7 +17,9 @@ interface PCChoiceState {
 
 export class PCChoice extends React.Component<PCChoiceProps, PCChoiceState> {
     public renderImageChoices() {
+        // return this.props.choices.map((choice) => (
 
+        // ));
     }
 
     public renderButtons() {

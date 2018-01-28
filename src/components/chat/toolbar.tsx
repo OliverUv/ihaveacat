@@ -5,14 +5,14 @@ import { Toolbar, ToolbarButton, Icon } from 'react-onsenui';
 
 import { TransKey } from '../../trans';
 
-interface PCTextProps {
+interface ChatToolbarProps {
     title:TransKey;
 }
 
-interface PCTextState {
+interface ChatToolbarState {
 }
 
-export class PCText extends React.Component<PCTextProps, PCTextState> {
+export class ChatToolbar extends React.Component<ChatToolbarProps, ChatToolbarState> {
     public handleClick = () => {
         // FIXME: open the settings view
     }

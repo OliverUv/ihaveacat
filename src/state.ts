@@ -27,7 +27,7 @@ export interface Inner {
 export type State = Inner & IObservableObject;
 
 export const state:State = observable({
-  view: View.Settings,
+  view: View.StartMenu,
   settings: new_settings(),
   game: Game.new_game_state(),
 });

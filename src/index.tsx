@@ -52,9 +52,6 @@ export class Main extends React.Component<MainProps, {}> {
           messages={messages[S.state.settings.locale]}
           key={LocaleCode[S.state.settings.locale]}>
           {page}
-          {/* <Page>
-            <NPCChat />
-          </Page> */}
       </IntlProvider>
     );
   }

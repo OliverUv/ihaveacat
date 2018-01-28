@@ -87,6 +87,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
     }
 
     private choice(c:TransKey | '') {
+      console.log(`Got choice ${c}`);
       const r = this.state.model.next(c);
       const new_logs:LogMsg[] = [];
       const n_log_items = this.state.log.length;
@@ -120,7 +121,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
           res.push({
             key: c,
             id: (c as TransKey),
-            color: '#FFFFFF',
+            color: '#000000',
             disabled: false,
           });
           continue;
@@ -128,7 +129,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
         res.push({
           key: c.id,
           id: c.id,
-          color: '#FFFFFF',
+          color: '#000000',
           disabled: false,
         });
       }

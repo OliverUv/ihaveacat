@@ -22,12 +22,20 @@ export class PCChoice extends React.Component<PCChoiceProps, PCChoiceState> {
         // ));
     }
 
+    private on_choice(choice:TransKey) {
+      this.props.make_choice(choice);
+    }
+
     public renderButtons() {
         return this.props.choices.map((choice) => (
             <ActionSheetButton
-                onClick={() => this.props.make_choice(choice.id)}
+                key={choice.id}
+                onClick={() => this.on_choice(choice.id)}
             >
-                <label style={{color: choice.color}}>
+                <label
+                  onClick={() => this.on_choice(choice.id)}
+                  style={{color: choice.color}}
+                >
                     <FormattedHTMLMessage id={choice.id} />
                 </label>
             </ActionSheetButton>

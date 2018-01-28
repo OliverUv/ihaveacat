@@ -10,6 +10,11 @@ import {
   NodeType,
   TalkIterator,
   PCNode,
+  ChoiceTypes,
+  ChoiceListTypes,
+  TextChoice,
+  ImageChoice,
+  ButtonChoiceX,
   TalkList,
   is_npc_node,
   is_pc_node,
@@ -26,6 +31,11 @@ import { PCChat } from './pc_chat';
 // content: TransKey
 
 import { PCChoice } from './pc_choice';
+export interface NormalizedChoice {
+  id:TransKey;
+  color:string;
+  disabled:boolean;
+}
 // make_choice: (choice:transkey) => void
 // type: NodeType.pcimage | NodeType.pcsay | NodeType.pcbutton
 // choices: { id: TransKey, color:string, disabled:boolean }[]
@@ -71,19 +81,85 @@ export class Chat extends React.Component<ChatProps, ChatState> {
 
     private choice(c:TransKey) {
       const r = this.state.model.next(c);
+      const new_logs:LogMsg[] = [];
       for (let i = 0; i < r.responses.length; i++) {
         const response = r.responses[i];
         let npc:TransKey|undefined = undefined;
         if ((response as any).npc != undefined) {
           npc = (response as any).npc;
         }
-        this.state.log.push({
+        new_logs.push({
           player: false,
           npc,
           content: response.id,
           type: response.type,
         });
       }
+      if (r.consequence != undefined) { r.consequence(); }
+      this.setState({
+        ...this.state,
+        log: this.state.log.concat(new_logs),
+        current_choice: r.choice,
+      });
+    }
+
+    private text_choices(choices:TextChoice[]) : NormalizedChoice[] {
+      const res:NormalizedChoice[] = [];
+      for (let i = 0; i < choices.length; i++) {
+        const c = choices[i];
+        if (typeof c == 'string') {
+          res.push({
+            id: (c as TransKey),
+            color: '#FFFFFF',
+            disabled: false,
+          });
+          continue;
+        }
+        res.push({
+          id: c.id,
+          color: '#FFFFFF',
+          disabled: false,
+        });
+      }
+      return res;
+    }
+
+    private image_choices(choices:ImageChoice[]) : NormalizedChoice[] {
+      return this.text_choices((choices as any));
+    }
+
+    private button_choices(choices:ButtonChoiceX[]) : NormalizedChoice[] {
+      const res:NormalizedChoice[] = [];
+      for (let i = 0; i < choices.length; i++) {
+        const c = choices[i];
+        res.push({
+          id: c.id,
+          color: c.color,
+          disabled: c.disabled || false,
+        });
+      }
+      return res;
+    }
+
+    private render_choice() {
+      // tslint:disable-next-line
+      if (this.state.current_choice == undefined) { return null; }
+      const c = this.state.current_choice;
+      let choices:NormalizedChoice[];
+      if (c.type == NodeType.pcsay) {
+        choices = this.text_choices(c.choices);
+      } else if (c.type == NodeType.pcimage) {
+        choices = this.image_choices(c.choices);
+      } else if (c.type == NodeType.pcbutton) {
+        choices = this.button_choices(c.choices);
+      } else {
+        throw new Error(`Unknown choice type`);
+      }
+      return (<PCChoice
+                  make_choice={this.choice.bind(this)}
+                  type={c.type}
+                  choices={choices}
+              />);
     }
 
     public render() {
@@ -91,12 +167,12 @@ export class Chat extends React.Component<ChatProps, ChatState> {
         return (
             <div className='Chat'>
                 <Toolbar title={this.props.chat.chat_id} />
-                <List renderRow={this.dispatchLogMsg.bind(this)} dataSource={this.state.log} />
+                <List renderRow={this.renderLogMsg.bind(this)} dataSource={this.state.log} />
             </div>
         );
     }
 
-    private dispatchLogMsg(log:LogMsg[], index:number) {
+    private renderLogMsg(log:LogMsg[], index:number) {
       const l = log[index];
       if (l.type == NodeType.npcimage || l.type == NodeType.npcsay) {
         const npc = l.npc != undefined ? l.npc : this.props.chat.chat_id;

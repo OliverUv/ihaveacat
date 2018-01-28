@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
-import { ListItem } from 'react-onsenui';
+import { ActionSheet, ActionSheetButton } from 'react-onsenui';
 
 import { TransKey } from '../../trans';
 import { NodeType } from '../../game';
@@ -16,9 +16,36 @@ interface PCChoiceState {
 }
 
 export class PCChoice extends React.Component<PCChoiceProps, PCChoiceState> {
+    public renderImageChoices() {
+        // return this.props.choices.map((choice) => (
+
+        // ));
+    }
+
+    public renderButtons() {
+        return this.props.choices.map((choice) => (
+            <ActionSheetButton
+                onClick={() => this.props.make_choice(choice.id)}
+            >
+                <label style={{color: choice.color}}>
+                    <FormattedHTMLMessage id={choice.id} />
+                </label>
+            </ActionSheetButton>
+        ));
+    }
+
     public render() {
         return (
-            <p />
+            <ActionSheet
+                isOpen={true}
+                maskColor='rgba(0,0,0,0.2)'
+                isCancelable={false}
+            >
+                {this.props.type === NodeType.pcimage
+                    && this.renderImageChoices()
+                    || this.renderButtons()}
+
+            </ActionSheet>
         );
     }
 }

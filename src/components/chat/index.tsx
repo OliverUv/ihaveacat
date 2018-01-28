@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
-import { Page, Toolbar, ToolbarButton, Icon, List, ListItem, Range, Radio } from 'react-onsenui';
+import { Page, ToolbarButton, Icon, List, ListItem, Range, Radio } from 'react-onsenui';
 
 // import './chat.css';
 import * as S from '../../state';
@@ -43,8 +43,7 @@ export interface NormalizedChoice {
 import { SystemMessage } from './system_message';
 // text:TransKey
 
-// toolbar
-// title:TransKey
+import { ChatToolbar } from './toolbar';
 
 interface ChatProps {
   state:S.State;
@@ -162,13 +161,16 @@ export class Chat extends React.Component<ChatProps, ChatState> {
               />);
     }
 
+    public renderToolbar = () => {
+    return (<ChatToolbar title={this.props.chat.chat_id} />);
+    }
+
     public render() {
         const on_next = this.props.next;
         return (
-            <div className='Chat'>
-                <Toolbar title={this.props.chat.chat_id} />
-                <List renderRow={this.renderLogMsg.bind(this)} dataSource={this.state.log} />
-            </div>
+            <Page renderToolbar={this.renderToolbar}>
+              <List renderRow={this.renderLogMsg.bind(this)} dataSource={this.state.log} />
+            </Page>
         );
     }
 

@@ -8,6 +8,7 @@ export type TalkList = TalkNode[];
 export type Choice = TransKey | '';
 export type Traversal = Choice[];
 
+export type ChoiceListTypes = TextChoice[] | ImageChoice[] | ButtonChoiceX[];
 export type ChoiceTypes = TextChoice | ImageChoice | ButtonChoiceX;
 
 export enum NodeType {

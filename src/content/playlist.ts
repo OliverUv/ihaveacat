@@ -130,6 +130,5 @@ export const chat1:Chat = {
 
 export const playlist:PlayList = [
   scene1,
-  testchat,
   chat1,
 ];

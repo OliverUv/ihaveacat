@@ -12,7 +12,7 @@ import { App } from './App';
 
 import { messages, LocaleCode } from './trans';
 
-import { Settings, Credits, Story, Welcome } from 'components';
+import { Settings, Credits, Game, Welcome } from 'components';
 
 interface MainProps {
   state:S.State;
@@ -33,8 +33,8 @@ export class Main extends React.Component<MainProps, {}> {
       case S.View.StartMenu:
         page = <Welcome />;
         break;
-      case S.View.Story1:
-        page = <Story />;
+      case S.View.Game:
+        page = <Game state={S.state} />;
         break;
       case S.View.Settings:
         page = <Settings state={S.state} />;

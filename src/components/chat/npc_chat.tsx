@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
-interface PCTextProps {
+interface NPCChatProps {
 }
 
-interface PCTextState {
+interface NPCChatState {
 }
 
-export class PCText extends React.Component<PCTextProps, PCTextState> {
+export class NPCChat extends React.Component<NPCChatProps, NPCChatState> {
     public render() {
         return (
             <p />

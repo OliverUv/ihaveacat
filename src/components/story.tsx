@@ -7,27 +7,24 @@ import './story.css';
 
 interface StoryProps {
   scene:Scene;
+  next:() => void;
 }
 
 interface StoryState {}
 
 export class Story extends React.Component<StoryProps, StoryState> {
-    public handleClick = () => {
-
-    }
-
     public render() {
         // const storyId = 'story' + this.props.storyId;
+        const on_next = this.props.next;
         return (
             <div className='Story'>
                 <img src={'story_images/' + this.props.scene.id} />
 
                 <div className='Story-text'>
-                    <FormattedHTMLMessage
-                        id={this.props.scene.id}
-                    />
                     <span>
-                        sdfjsdlkfjsldkfjsdlkjfkldsjdddfskfjdsklfjkwljeiofjwiojfweiojfowmciowjif fjiewofjweio fjwiefjwio fjewifjwoi fwjifwejo fwifjwio fjweio jfwifjewo fwfwejfojweif wefjweiofjweio fwejifjwof fweifojwo fw
+                        <FormattedHTMLMessage
+                            id={this.props.scene.id}
+                        />
                     </span>
                     {/* <FormattedHTMLMessage id={storyId} /> */}
                 </div>

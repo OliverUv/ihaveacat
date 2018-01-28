@@ -26,5 +26,6 @@ export function new_game_state() : State {
     get current_play(this:State) {
       return this.playlist[this.position_in_playlist];
     },
+
   };
 }

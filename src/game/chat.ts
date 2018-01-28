@@ -40,7 +40,7 @@ export interface SystemMessage {
 
 export interface NPCSay {
   type:NodeType.npcsay;
-  id:TransKey;
+  id:TransKey; // translation key of text
   next?:TalkNode;
   npc?:TransKey; // if no key, use chat key
 }
@@ -104,7 +104,7 @@ interface Rollup {
   choice?:PCNode;
 }
 
-class TalkIterator {
+export class TalkIterator {
   private position = 0;
   private current_node:TalkNode;
   private traversal:Traversal = [];

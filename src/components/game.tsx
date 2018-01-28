@@ -21,15 +21,18 @@ export class Game extends React.Component<GameProps, GameState> {
 
       const s = this.props.state;
       const play = s.game.current_play;
+      const next = () => { s.game.position_in_playlist += 1; };
 
       if (play.type == PlayType.scene) {
         return (
-          <Story scene={play} />
+          <Story scene={play} next={next}/>
         );
       }
-
-      return (
-        <Chat chat={} />
-      );
+      if (play.type == PlayType.chat) {
+        return (
+          <Chat chat={play} next={next} state={s}/>
+        );
+      }
+      return <p/>;
     }
 }

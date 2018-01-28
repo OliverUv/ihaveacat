@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Page, ToolbarButton, Icon, List, ListItem, Range, Radio } from 'react-onsenui';
+import { observer } from 'mobx-react';
 
 // import './chat.css';
 import * as S from '../../state';
@@ -32,6 +33,7 @@ import { PCChat } from './pc_chat';
 
 import { PCChoice } from './pc_choice';
 export interface NormalizedChoice {
+  key:string;
   id:TransKey;
   color:string;
   disabled:boolean;
@@ -52,6 +54,7 @@ interface ChatProps {
 }
 
 interface LogMsg {
+  key:number;
   player:boolean;
   npc?:TransKey;
   content:TransKey;
@@ -68,6 +71,7 @@ interface ChatState {
   log:LogMsg[];
 }
 
+@observer
 export class Chat extends React.Component<ChatProps, ChatState> {
     constructor(props:ChatProps) {
       super(props);
@@ -78,9 +82,14 @@ export class Chat extends React.Component<ChatProps, ChatState> {
       };
     }
 
-    private choice(c:TransKey) {
+    public componentDidMount() {
+      this.choice('');
+    }
+
+    private choice(c:TransKey | '') {
       const r = this.state.model.next(c);
       const new_logs:LogMsg[] = [];
+      const n_log_items = this.state.log.length;
       for (let i = 0; i < r.responses.length; i++) {
         const response = r.responses[i];
         let npc:TransKey|undefined = undefined;
@@ -88,6 +97,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
           npc = (response as any).npc;
         }
         new_logs.push({
+          key: n_log_items + 1 + i,
           player: false,
           npc,
           content: response.id,
@@ -108,6 +118,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
         const c = choices[i];
         if (typeof c == 'string') {
           res.push({
+            key: c,
             id: (c as TransKey),
             color: '#FFFFFF',
             disabled: false,
@@ -115,6 +126,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
           continue;
         }
         res.push({
+          key: c.id,
           id: c.id,
           color: '#FFFFFF',
           disabled: false,
@@ -132,6 +144,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
       for (let i = 0; i < choices.length; i++) {
         const c = choices[i];
         res.push({
+          key: c.id,
           id: c.id,
           color: c.color,
           disabled: c.disabled || false,
@@ -170,25 +183,26 @@ export class Chat extends React.Component<ChatProps, ChatState> {
         return (
             <Page renderToolbar={this.renderToolbar}>
               <List renderRow={this.renderLogMsg.bind(this)} dataSource={this.state.log} />
+              {this.render_choice()}
             </Page>
         );
     }
 
-    private renderLogMsg(log:LogMsg[], index:number) {
-      const l = log[index];
+    private renderLogMsg(l:LogMsg, index:number) {
+      // const l = log[index];
       if (l.type == NodeType.npcimage || l.type == NodeType.npcsay) {
         const npc = l.npc != undefined ? l.npc : this.props.chat.chat_id;
         return (
-          <NPCChat npc={npc} type={l.type} content={l.content} />
+          <NPCChat key={index} npc={npc} type={l.type} content={l.content} />
         );
       }
       if (l.type == NodeType.system_message) {
         return (
-          <SystemMessage text={l.content} />
+          <SystemMessage key={index} text={l.content} />
         );
       }
       return (
-        <PCChat type={l.type} content={l.content} />
+        <PCChat key={index} type={l.type} content={l.content} />
       );
       // throw new Error('Unknown thing in message log');
     }

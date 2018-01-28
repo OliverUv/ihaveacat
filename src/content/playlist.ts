@@ -132,3 +132,7 @@ export const playlist:PlayList = [
   scene1,
   chat1,
 ];
+
+export function get_playlist() {
+  return playlist;
+}

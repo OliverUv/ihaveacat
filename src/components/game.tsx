@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
+import { observer } from 'mobx-react';
 
 import * as S from '../state';
 import { Story } from './story';
@@ -15,13 +16,18 @@ interface GameProps {
 
 interface GameState {}
 
+@observer
 export class Game extends React.Component<GameProps, GameState> {
 
     public render() {
 
       const s = this.props.state;
-      const play = s.game.current_play;
+      const play = s.game.playlist[s.game.position_in_playlist];
       const next = () => { s.game.position_in_playlist += 1; };
+
+      console.log(`position in list: ${s.game.position_in_playlist}`);
+      console.log(`in game component, play:`);
+      console.log(play);
 
       if (play.type == PlayType.scene) {
         return (

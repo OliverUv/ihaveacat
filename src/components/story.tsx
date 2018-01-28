@@ -10,18 +10,30 @@ interface StoryProps {
   next:() => void;
 }
 
-interface StoryState {}
+interface StoryState {
+  clicked:boolean;
+}
 
 export class Story extends React.Component<StoryProps, StoryState> {
+    constructor(props:StoryProps) {
+      super(props);
+      this.state = {
+        clicked: false,
+      };
+    }
     public render() {
         // const storyId = 'story' + this.props.storyId;
-        const on_next = this.props.next;
+        const on_next = () => {
+          if (this.state.clicked == true) { return; }
+          this.setState({clicked: true});
+          this.props.next();
+        };
         return (
-            <div className='Story'>
+            <div className='Story' onClick={on_next}>
                 <img src={'story_images/' + this.props.scene.id} />
 
                 <div className='Story-text'>
-                    <span>
+                    <span onClick={on_next}>
                         <FormattedHTMLMessage
                             id={this.props.scene.id}
                         />

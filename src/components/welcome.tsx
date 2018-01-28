@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
+import * as S from '../state';
 import './welcome.css';
 
 interface WelcomeProps {
+    state:S.State;
 }
 
 interface WelcomeState {}
 
 export class Welcome extends React.Component<WelcomeProps, WelcomeState> {
     public handleClick = () => {
-
+      this.props.state.view = S.View.Game;
     }
 
     public render() {

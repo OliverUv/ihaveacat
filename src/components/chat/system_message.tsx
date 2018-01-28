@@ -15,14 +15,12 @@ interface SystemMessageState {
 export class SystemMessage extends React.Component<SystemMessageProps, SystemMessageState> {
     public render() {
         return (
-            <ListItem modifier='nodivider'>
-                <div style={{
-                    width: '100%',
-                    textAlign: 'center',
-                }}>
-                    <FormattedHTMLMessage id={this.props.text} />
-                </div>
-            </ListItem>
+              <div style={{
+                  width: '100%',
+                  textAlign: 'center',
+              }}>
+                  <FormattedHTMLMessage id={this.props.text} />
+              </div>
         );
     }
 }

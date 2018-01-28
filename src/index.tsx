@@ -33,7 +33,7 @@ export class Main extends React.Component<MainProps, {}> {
 
     switch (S.state.view) {
       case S.View.StartMenu:
-        page = <Welcome />;
+        page = <Welcome state={S.state}/>;
         break;
       case S.View.Game:
         page = <Game state={S.state} />;

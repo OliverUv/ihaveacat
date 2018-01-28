@@ -7,6 +7,21 @@ export const messages = {
   welcome: `(っ' ▽' )ノ ni hao <code>PENG YOU</code> qing enjoy the comic`,
   game_title: `I have a cat`,
 
+  // Settings
+  settings_volume: '音量',
+  settings_credits: '制作人',
+  settings_reset: '重置游戏',
+
+  // Storys
+  story1: 'fsdfklsdfjkdls',
+  story2: 'sfjsdklfjdk',
+  story3: 'fdsfsdfdsfewfwe',
+
+  // Credits
+  credit1_name: 'Oliver',
+  credit1_bio: 'some bios here lolllll',
+  credit1_avatar: `<img src='http://placekitten.com/g/40/40' className='list-item_thumbnail' />`,
+
   // NPC names
   bingo: `Bingo`,
   oliver: `Oliver`,

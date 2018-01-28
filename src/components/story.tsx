@@ -1,30 +1,40 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
+import { state, View } from '../state';
+
 import './story.css';
 
 interface StoryProps {
-    // storyId:number;
+    storyId:number;
 }
 
 interface StoryState {}
 
 export class Story extends React.Component<StoryProps, StoryState> {
     public handleClick = () => {
-
+        switch (this.props.storyId) {
+            case 1:
+                state.view = View.Story2;
+                break;
+            case 2:
+                state.view = View.Story3;
+                break;
+            case 3:
+                state.view = View.Game;
+                break;
+        }
     }
 
     public render() {
-        // const storyId = 'story' + this.props.storyId;
         return (
             <div className='Story'>
                 <img src='welcome.jpg' />
 
                 <div className='Story-text'>
                     <span>
-                        sdfjsdlkfjsldkfjsdlkjfkldsjdddfskfjdsklfjkwljeiofjwiojfweiojfowmciowjif fjiewofjweio fjwiefjwio fjewifjwoi fwjifwejo fwifjwio fjweio jfwifjewo fwfwejfojweif wefjweiofjweio fwejifjwof fweifojwo fw
+                        <FormattedHTMLMessage id={`story${this.props.storyId}`} />
                     </span>
-                    {/* <FormattedHTMLMessage id={storyId} /> */}
                 </div>
             </div>
         );

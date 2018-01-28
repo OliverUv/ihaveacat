@@ -44,7 +44,8 @@ export class Settings extends React.Component<SettingsProps> {
     }
 
     public handleVolumeChange = (e:any) => {
-        state.settings.volume = e.target.value;
+        const volume = e.target.value / 100;
+        state.settings.volume = parseFloat(volume.toFixed(1));
     }
 
     public handleReset = () => {
@@ -78,8 +79,7 @@ export class Settings extends React.Component<SettingsProps> {
                                 />
                         </label>
                         <label className='center'>
-                            Music
-                            {/* FIXME: lang */}
+                            <FormattedHTMLMessage id='settings_volume' />
                         </label>
                     </ListItem>
                 </List>
@@ -93,8 +93,7 @@ export class Settings extends React.Component<SettingsProps> {
                         onClick={this.handleCredit}
                     >
                         <div className='center'>
-                            Credit
-                            {/* FIXME: lang */}
+                            <FormattedHTMLMessage id='settings_credits' />
                         </div>
                     </ListItem>
                 </List>
@@ -107,13 +106,11 @@ export class Settings extends React.Component<SettingsProps> {
                         onClick={this.handleReset}
                     >
                         <div className='center'>
-                            Reset
-                            {/* FIXME: lang */}
+                            <FormattedHTMLMessage id='settings_reset' />
                         </div>
                     </ListItem>
                 </List>
             </Page>
         );
-        //FIXME: meow lang
     }
 }

@@ -112,6 +112,6 @@ export class Chat extends React.Component<ChatProps, ChatState> {
       return (
         <PCChat type={l.type} content={l.content} />
       );
-      throw new Error('Unknown thing in message log');
+      // throw new Error('Unknown thing in message log');
     }
 }

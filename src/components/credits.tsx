@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { Toolbar, ToolbarButton, Icon } from 'react-onsenui';
 
 import * as S from '../state';
+import { FormattedHTMLMessage } from 'react-intl';
 
 @observer
 export class Credits extends React.Component {
@@ -15,8 +16,7 @@ export class Credits extends React.Component {
         return (
             <Toolbar>
                 <div className='center'>
-                    Credits
-                    {/* FIXME: */}
+                    <FormattedHTMLMessage id='settings_credits' />
                 </div>
                 <div className='left'>
                     <ToolbarButton  onClick={this.handleReturn}>
@@ -27,20 +27,18 @@ export class Credits extends React.Component {
         );
     }
 
-    public renderCreditRow = (row:string[], index:number) => {
+    public renderCreditRow = (row:string, index:number) => {
         return (
             <ListItem key={index}>
                 <div className='left'>
-                    <img src={'http://placekitten.com/g/40/40'/*FIXME:*/} className='list-item__thumbnail' />
+                    <FormattedHTMLMessage id={`credit${row}_avatar`} />
                 </div>
                 <div className='center'>
                     <div className='list-item__title'>
-                        whatever
-                        {/* FIXME: */}
+                        <FormattedHTMLMessage id={`credit${row}_name`} />
                     </div>
                     <div className='list-item__subtitle'>
-                        here is the bios. we r supercat.
-                        {/* FIXME: */}
+                        <FormattedHTMLMessage id={`credit${row}_bio`} />
                     </div>
                 </div>
             </ListItem>
@@ -52,7 +50,7 @@ export class Credits extends React.Component {
             <Page renderToolbar={this.renderToolbar}>
                 <List
                     renderRow={this.renderCreditRow}
-                    dataSource={['fc', 'bingo', 'necolo', 'oliver', 'haidong'] /*FIXME: better from lang {avatar, name, bio} */}
+                    dataSource={[1, 2, 3, 4, 5, 6]}
                 />
             </Page>
         );

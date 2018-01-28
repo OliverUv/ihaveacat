@@ -13,6 +13,8 @@ import { App } from './App';
 import { messages, LocaleCode } from './trans';
 
 import { Settings, Credits, Game, Welcome } from 'components';
+import { NPCChat } from 'components/chat/npc_chat';
+import { Page } from 'react-onsenui';
 
 interface MainProps {
   state:S.State;
@@ -50,6 +52,9 @@ export class Main extends React.Component<MainProps, {}> {
           messages={messages[S.state.settings.locale]}
           key={LocaleCode[S.state.settings.locale]}>
           {page}
+          {/* <Page>
+            <NPCChat />
+          </Page> */}
       </IntlProvider>
     );
   }

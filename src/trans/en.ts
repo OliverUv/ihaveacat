@@ -6,6 +6,21 @@ export const messages:Translation = {
   welcome: `(っ' ▽' )ノ hello <code>FRIEND</code> please enjoy the comic`,
   game_title: `I have a cat`,
 
+  // Settings
+  settings_volume: 'Volume',
+  settings_credits: 'Credits',
+  settings_reset: 'Reset Game',
+
+  // Storys
+  story1: 'fsdfklsdfjkdls',
+  story2: 'sfjsdklfjdk',
+  story3: 'fdsfsdfdsfewfwe',
+
+  // Credits
+  credit1_name: 'Oliver',
+  credit1_bio: 'some bios here lolllll',
+  credit1_avatar: `<img src='http://placekitten.com/g/40/40' className='list-item_thumbnail' />`,
+
   // NPC names
   bingo: `Bingo`,
   oliver: `Oliver`,

@@ -1,11 +1,19 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
+import { Page, Toolbar, ToolbarButton, Icon, List, ListItem, Range, Radio } from 'react-onsenui';
 
 // import './chat.css';
 import * as S from '../../state';
-import { TalkList, TalkIterator, Chat as PlayChat } from '../../game';
-import { TransKey } from '../../trans';
 import { state } from '../../state';
+import {
+  Chat as PlayChat,
+  NodeType,
+  TalkIterator,
+  TalkList,
+  is_npc_node,
+  is_pc_node,
+} from '../../game';
+import { TransKey } from '../../trans';
 
 import { NPCChat } from './npc_chat';
 // npc: TransKey
@@ -33,28 +41,60 @@ interface ChatProps {
   next:() => void;
 }
 
+interface LogMsg {
+  player:boolean;
+  npc?:TransKey;
+  content:TransKey;
+  type:NodeType.npcimage
+      | NodeType.npcsay
+      | NodeType.pcimage
+      | NodeType.pcsay
+      | NodeType.system_message;
+}
+
 interface ChatState {
   model:TalkIterator;
+  log: LogMsg[];
 }
 
 export class Chat extends React.Component<ChatProps, ChatState> {
+    constructor(props:ChatProps) {
+      super(props);
+      this.state = {
+        model: new TalkIterator(props.chat.content),
+        log: [],
+      };
+    }
+
+    private choice(c:TransKey) {
+      this.state.model.next(c);
+    }
+
     public render() {
-        // const chatId = 'chat' + this.props.chatId;
         const on_next = this.props.next;
         return (
-            <p />
-            // <div className='Chat'>
-                // <img src={'chat_images/' + this.props.scene.id} />
-
-                // <div className='Chat-text'>
-                    // <span>
-                        // <FormattedHTMLMessage
-                            // id={this.props.scene.id}
-                        // />
-                    // </span>
-                    // {[> <FormattedHTMLMessage id={chatId} /> <]}
-                // </div>
-            // </div>
+            <div className='Chat'>
+                <Toolbar title={this.props.chat.chat_id} />
+                <List renderRow={this.dispatchLogMsg.bind(this)} dataSource={this.state.log} />
+            </div>
         );
+    }
+
+    private dispatchLogMsg(log:LogMsg[], index:number) {
+      const l = log[index];
+      if (l.type == NodeType.npcimage || l.type == NodeType.npcsay) {
+        const npc = l.npc != undefined ? l.npc : this.props.chat.chat_id;
+        return (
+          <NPCChat npc={npc} type={l.type} content={l.content} />
+        );
+      }
+      if (l.type == NodeType.system_message) {
+        return (
+          <SystemMessage text={l.content} />
+        );
+      }
+      return (
+        <PCChat type={l.type} content={l.content} />
+      );
     }
 }

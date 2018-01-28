@@ -19,13 +19,13 @@ export enum NodeType {
   system_message,
 }
 
-function is_pc_node(n:TalkNode) : n is PCNode {
+export function is_pc_node(n:TalkNode) : n is PCNode {
   return n.type == NodeType.pcimage
       || n.type == NodeType.pcsay
       || n.type == NodeType.pcbutton;
 }
 
-function is_npc_node(n:TalkNode) : n is NPCNode {
+export function is_npc_node(n:TalkNode) : n is NPCNode {
   return !is_pc_node(n);
 }
 

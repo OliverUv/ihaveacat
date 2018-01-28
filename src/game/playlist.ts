@@ -20,7 +20,7 @@ export interface Scene {
 
 export interface Chat {
   type:PlayType.chat;
-  chat_id:string;
+  chat_id:TransKey;
   content:TalkList;
 }
 

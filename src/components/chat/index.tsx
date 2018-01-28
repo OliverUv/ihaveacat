@@ -7,25 +7,19 @@ import { TalkList, TalkIterator, Chat as PlayChat } from '../../game';
 import { TransKey } from '../../trans';
 import { state } from '../../state';
 
-import { PCText } from './pc_text';
-// make_choice: (choice:transkey) => void
-// choices:transkey[]
-
-import { NPCText } from './npc_text';
+import { NPCChat } from './npc_chat';
 // npc: TransKey
-// text: TransKey
+// type: NodeType.npcimage | NodeType.npcsay
+// content: TransKey
 
-import { PCImage } from './pc_image';
+import { PCChat } from './pc_chat';
+// type: NodeType.pcimage | NodeType.pcsay
+// content: TransKey
+
+import { PCChoice } from './pc_choice';
 // make_choice: (choice:transkey) => void
-// choices:transkey[]
-
-import { PCButton } from './pc_button';
-// make_choice: (choice:TransKey) => void
+// type: NodeType.pcimage | NodeType.pcsay | NodeType.pcbutton
 // choices: { id: TransKey, color:string, disabled:boolean }[]
-
-import { NPCImage } from './npc_image';
-// npc: TransKey
-// image:TransKey
 
 import { SystemMessage } from './system_message';
 // text:TransKey

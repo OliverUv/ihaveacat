@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
-interface PCImageProps {
+interface PCChoiceProps {
 }
 
-interface PCImageState {
+interface PCChoiceState {
 }
 
-export class PCImage extends React.Component<PCImageProps, PCImageState> {
+export class PCChoice extends React.Component<PCChoiceProps, PCChoiceState> {
     public render() {
         return (
             <p />

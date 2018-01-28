@@ -19,13 +19,13 @@ export enum NodeType {
   system_message,
 }
 
-function is_pc_node(n:TalkNode) : n is PCNode {
+export function is_pc_node(n:TalkNode) : n is PCNode {
   return n.type == NodeType.pcimage
       || n.type == NodeType.pcsay
       || n.type == NodeType.pcbutton;
 }
 
-function is_npc_node(n:TalkNode) : n is NPCNode {
+export function is_npc_node(n:TalkNode) : n is NPCNode {
   return !is_pc_node(n);
 }
 
@@ -161,7 +161,7 @@ export class TalkIterator {
     }
     const cur = <PCNode>this.current_node;
     for (let i = 0; i < cur.choices.length; i++) {
-      const choice:ChoiceTypes = cur.choices[i];
+      const choice = cur.choices[i];
       if (typeof choice == 'string') {
         if (choice != c) { continue; }
         // user chose this, has no next
@@ -177,6 +177,7 @@ export class TalkIterator {
       }
 
       if (choice.id != c) { continue; }
+      this.traversal.push(c);
       if ((<ButtonChoiceX>choice).disabled != undefined
           && (<ButtonChoiceX>choice).disabled) {
         throw new Error(`Attempted to choose disabled button`);
@@ -213,6 +214,5 @@ export class TalkIterator {
 
     // const choices:Choice[] = [];
     // this.current_node.
-    // this.traversal.push(c);
   }
 }

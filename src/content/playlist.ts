@@ -58,39 +58,75 @@ export const chat1:Chat = {
   ],
 };
 
-export const testchat:Chat = {
-  type: PlayType.chat,
-  chat_id: 'oliver',
-  content: [
-    {
-      type: NodeType.npcsay,
-      id: 'testchat_1',
-    },
-    {
-      type: NodeType.pcsay,
-      choices: [
-        'testchat_21',
-        'testchat_22',
-        {
-          id: 'testchat_23',
-          next: {
-            type: NodeType.npcsay,
-            id: 'testchat_24',
-          },
-        },
-      ],
-    },
-    {
-      type: NodeType.npcsay,
-      id: 'testchat_3',
-    },
-    {
-      type: NodeType.npcsay,
-      id: 'testchat_4',
-      npc: 'bingo',
-    },
-  ],
-};
+// export const testchat:Chat = {
+//   type: PlayType.chat,
+//   chat_id: 'oliver',
+//   content: [
+//     {
+//       type: NodeType.npcsay,
+//       id: 'testchat_1',
+//     },
+//     {
+//       type: NodeType.pcsay,
+//       choices: [
+//         'testchat_21',
+//         'testchat_22',
+//         {
+//           id: 'testchat_23',
+//           next: {
+//             type: NodeType.npcsay,
+//             id: 'testchat_24',
+//           },
+//         },
+//       ],
+//     },
+//     {
+//       type: NodeType.npcsay,
+//       id: 'testchat_3',
+//     },
+//     {
+//       type: NodeType.npcsay,
+//       id: 'testchat_4',
+//       npc: 'bingo',
+//     },
+//     {
+//       type: NodeType.pcimage,
+//       choices: [
+//         'testchat_5',
+//         {
+//           id: 'testchat_6',
+//           next: {
+//             type: NodeType.npcsay,
+//             id: 'testchat_7',
+//           },
+//         },
+//       ],
+//     },
+//     {
+//       type: NodeType.pcbutton,
+//       choices: [
+//         {
+//           id: 'testchat_8',
+//           color: '#ffffff',
+//           disabled: false,
+//           next: {
+//             type: NodeType.npcsay,
+//             id: 'testchat_9',
+//           },
+//         },
+//         {
+//           id: 'testchat_10',
+//           color: '#333333',
+//           disabled: true,
+//           next: {
+//             type: NodeType.npcsay,
+//             id: 'testchat_11',
+//           },
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 export const playlist:PlayList = [
   scene1,

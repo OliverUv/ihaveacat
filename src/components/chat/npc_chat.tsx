@@ -10,7 +10,7 @@ import { NodeType } from '../../game';
 import { TransKey } from '../../trans';
 
 interface NPCChatProps {
-    type:NodeType.pcimage | NodeType.pcsay;
+    type:NodeType.npcimage | NodeType.npcsay;
     content:TransKey;
     npc:TransKey;
 }
